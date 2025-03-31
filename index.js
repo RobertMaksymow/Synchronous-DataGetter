@@ -13,7 +13,11 @@ const getAllIndicators = async () => {
   getDataBTC_1W();
 };
 
-getAllIndicators();
+//Excecute getAllIndicators function every 1 minutes
+setInterval(() => {
+  getAllIndicators();
+}, 1 * 60 * 1000);
+// getAllIndicators();
 
 //Connect to DB
 mongoose

@@ -1,4 +1,5 @@
 import axios from "axios";
+import BTC_1W from "../modelsDB/BTC_1W_model.js";
 
 const getDataBTC_1W = async (req, res) => {
   await axios
@@ -52,9 +53,13 @@ const getDataBTC_1W = async (req, res) => {
       },
     })
     .then((response) => {
-      response.data.data.map((n) => {
-        console.log("dATA", n);
-      });
+      // response.data.data.map((n) => {
+      //   console.log("dATA", n);
+      // });
+      console.log("Response", response.data.data);
+
+      const savedData = BTC_1W.insertMany(response.data.data);
+      console.log("✅ Data saved:", savedData);
     })
     .catch((error) => {
       console.error(error);
