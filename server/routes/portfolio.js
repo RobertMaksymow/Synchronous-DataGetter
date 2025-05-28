@@ -1,4 +1,5 @@
 import express from "express";
+import Portfolio from "../modelsDB/Portfolio_model.js";
 
 const router = express.Router();
 
@@ -16,11 +17,22 @@ router.get("/:id", (req, res) => {
   });
 });
 
-router.post("/", (req, res) => {
-  res.json({
-    message: `POST new Portfolio coin`,
-    status: "success",
-  });
+router.post("/", async (req, res) => {
+  const { transactionType, price, quantity, totalValue, coin, priceInBTC } =
+    req.body;
+  try {
+    const portfolioTrade = await Portfolio.create({
+      transactionType,
+      price,
+      quantity,
+      totalValue,
+      coin,
+      priceInBTC,
+    });
+    res.status(200).json(portfolioTrade);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 
 router.delete("/:id", (req, res) => {
