@@ -56,7 +56,7 @@ const getDataBTC_1W = async (req, res) => {
       // response.data.data.map((n) => {
       //   console.log("dATA", n);
       // });
-      console.log("Response", response.data.data);
+      console.log("Response: ", response.data.data);
 
       const savedData = BTC_1W.insertMany(response.data.data);
       console.log("✅ Data saved:", savedData);
