@@ -1,23 +1,37 @@
-import express from "express";
 import dotenv from "dotenv";
+import express from "express";
 import mongoose from "mongoose";
 
 import getDataBTC_1W from "./api/getDataBTC_1W.js";
 
 dotenv.config();
-const PORT = process.env.port || 3000;
 
 const app = express();
 
+//Middleware
+app.use((req, res, next) => {
+  console.log("Request received");
+  console.log(`Method: ${req.method}. Path: ${req.path}`);
+  next();
+});
+
+//Routes
+app.get("/", (req, res) => {
+  // res.send("Welcome to the Crypto Indicators API");
+  res.json({
+    message: "Welcome to the Crypto Indicators API",
+    status: "success",
+  });
+});
+
 const getAllIndicators = async () => {
-  getDataBTC_1W();
+  // getDataBTC_1W();
 };
 
 //Excecute getAllIndicators function every 1 minutes
 setInterval(() => {
   getAllIndicators();
 }, 1 * 60 * 1000);
-// getAllIndicators();
 
 //Connect to DB
 mongoose
