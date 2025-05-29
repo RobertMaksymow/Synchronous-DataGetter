@@ -48,8 +48,70 @@ export const createPortfolioTrade = async (req, res) => {
       coin,
       priceInBTC,
     });
+
     res.status(200).json(portfolioTrade);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
+};
+
+// DELETE a portfolio trade by ID
+export const deletePortfolioTrade = async (req, res) => {
+  const { id } = req.params;
+
+  // Check if the ID is a valid MongoDB ObjectId
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such trade ID" });
+  }
+
+  // Delete the portfolio trade with the given ID
+  try {
+    const portfolioTrade = await Portfolio.findByIdAndDelete({ _id: id });
+    if (!portfolioTrade) {
+      return res
+        .status(404)
+        .json({ error: "Portfolio trade not found in Database" });
+    }
+
+    res.status(200).json(portfolioTrade);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+// PATCH a portfolio trade by ID
+export const updatePortfolioTrade = async (req, res) => {
+  const { id } = req.params;
+
+  // Check if the ID is a valid MongoDB ObjectId
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such trade ID" });
+  }
+
+  // Update the portfolio trade with the given ID
+  try {
+    const portfolioTrade = await Portfolio.findByIdAndUpdate(
+      { _id: id },
+      { ...req.body },
+      { new: true }
+    );
+    if (!portfolioTrade) {
+      return res
+        .status(404)
+        .json({ error: "Portfolio trade not found in Database" });
+    }
+
+    res.status(200).json(portfolioTrade);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+// Export all functions for use in routes
+export default {
+  getPortfolioTrades,
+  getPortfolioTradeById,
+  createPortfolioTrade,
+  deletePortfolioTrade,
+  updatePortfolioTrade,
 };

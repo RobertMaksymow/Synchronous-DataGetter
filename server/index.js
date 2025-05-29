@@ -19,8 +19,14 @@ app.use((req, res, next) => {
 });
 
 //Routes
+// app.use("/", (req, res, next) => {
+//   res.send("Welcome to Synchronous Crypto API");
+//   next();
+// });
+
 app.use("/api/portfolio", portfolioRoutes);
 
+// GET data from TAAPI
 const getAllIndicators = async () => {
   // getDataBTC_1W();
 };

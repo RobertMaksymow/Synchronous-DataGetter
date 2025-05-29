@@ -4,6 +4,8 @@ import {
   getPortfolioTrades,
   getPortfolioTradeById,
   createPortfolioTrade,
+  deletePortfolioTrade,
+  updatePortfolioTrade,
 } from "../controllers/portfolioController.js";
 
 const router = express.Router();
@@ -14,18 +16,8 @@ router.get("/:id", getPortfolioTradeById);
 
 router.post("/", createPortfolioTrade);
 
-router.delete("/:id", (req, res) => {
-  res.json({
-    message: `DELETE Portfolio coin with ID: ${req.params.id}`,
-    status: "success",
-  });
-});
+router.delete("/:id", deletePortfolioTrade);
 
-router.patch("/:id", (req, res) => {
-  res.json({
-    message: `PATCH Portfolio coin with ID: ${req.params.id}`,
-    status: "success",
-  });
-});
+router.patch("/:id", updatePortfolioTrade);
 
 export default router;
