@@ -6,10 +6,11 @@ Backend app to fetch technical analysis data from API and saves it to MongoDB <b
 DONE:<br>
 RM-0001_Fetching_right_set_of_TA_data <br>
 RM-0002_Changing_project_structure <br>
-RM-0003_Create_Express_Routes
+RM-0003_Create_Express_Routes <br>
+RM-0004_Add_portfolio_coins_MongoDB <br>
 
 CURRENT: <br>
-RM-0004_Add_portfolio_coins_MongoDB
+RM-0005_Portfolio_trade_controller_db
 
 <br>
 PLAN: <br>
