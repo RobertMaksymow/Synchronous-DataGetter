@@ -21,4 +21,5 @@ Save_data_to_MongoDB <br>
 
 <br>
 PROBLEMS: <br>
-When fetching data and saving with MongoDB it adds data, but not replacing (updating) values
+When fetching data and saving with MongoDB it adds data, but not replacing (updating) values<br>
+Solving CORS issue
