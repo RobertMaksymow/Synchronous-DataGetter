@@ -4,7 +4,7 @@ const PortfolioDataDetailsCard = ({ data }) => {
   console.log("Portfolio Data Details Card:", data);
 
   return (
-    <div>
+    <div className="portfolio-details">
       <h3>{data.coin}</h3>
       <p>Transaction Type: {data.transactionType}</p>
       <p>Value: ${data.price}</p>

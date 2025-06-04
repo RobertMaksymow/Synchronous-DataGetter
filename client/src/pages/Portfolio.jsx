@@ -25,9 +25,9 @@ const Portfolio = () => {
   }, []);
 
   return (
-    <div>
+    <div className="">
       <h2>Portfolio page shows all your active trades</h2>
-      <div>
+      <div className="">
         {portfolioData &&
           portfolioData.map((item) => (
             <PortfolioDataDetailsCard key={item._id} data={item} />
