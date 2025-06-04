@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 
 import portfolioRoutes from "./routes/portfolio.js";
 
@@ -8,7 +9,14 @@ import getDataBTC_1W from "./api/getDataBTC_1W.js";
 
 dotenv.config();
 
+const corsOptions = {
+  origin: "*",
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
+
 const app = express();
+app.use(cors(corsOptions));
 
 //Middleware
 app.use(express.json()); // Parse JSON bodies (access to req.body)
