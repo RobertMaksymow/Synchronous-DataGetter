@@ -26,7 +26,7 @@ const Portfolio = () => {
 
   return (
     <div>
-      <h2>Portfolio page</h2>
+      <h2>Portfolio page shows all your active trades</h2>
       <div>
         {portfolioData &&
           portfolioData.map((item) => (
