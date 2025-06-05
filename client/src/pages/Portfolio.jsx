@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import PortfolioDataDetailsCard from "../components/PortfolioDataDetailsCard";
+import PortfolioForm from "../components/PortfolioForm";
 
 const Portfolio = () => {
   const [portfolioData, setPortfolioData] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Fetch portfolio data
@@ -19,6 +21,7 @@ const Portfolio = () => {
         console.log("Portfolio data:", dataAsJson);
       } catch (error) {
         console.error("Error fetching portfolio data:", error);
+        setError(error);
       }
     };
     fetchPortfolioData();
@@ -33,6 +36,8 @@ const Portfolio = () => {
             <PortfolioDataDetailsCard key={item._id} data={item} />
           ))}
       </div>
+      {error && <p className="error">Error: {error.message}</p>}
+      <PortfolioForm />
     </div>
   );
 };

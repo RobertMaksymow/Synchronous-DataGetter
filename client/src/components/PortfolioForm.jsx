@@ -5,7 +5,7 @@ const PortfolioForm = () => {
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [totalValue, setTotalValue] = useState(0);
-  const [coin, setCoin] = useState("BTC");
+  const [coin, setCoin] = useState(null);
   const [priceInBTC, setPriceInBTC] = useState(0);
   const [error, setError] = useState(null);
 
@@ -31,6 +31,8 @@ const PortfolioForm = () => {
     console.log("Portfolio Item Submitted:", portfolioItem);
 
     const data = await response.json();
+
+    console.log("EEerror:", error);
 
     if (!response.ok) {
       setError(data.error);
@@ -105,7 +107,8 @@ const PortfolioForm = () => {
             onChange={(e) => setPriceInBTC(e.target.value)}
           />
         </div>
-        <button type="submit">Add to Portfolio</button>
+        <button type="submit">Add new trade</button>
+        {error && <div className="error">{error}</div>}
       </form>
     </div>
   );
