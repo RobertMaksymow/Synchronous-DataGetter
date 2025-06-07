@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
 
 const Header = () => {
   return (
@@ -9,6 +10,7 @@ const Header = () => {
           <h1>Synchronous:Data_Getter</h1>
         </Link>
       </div>
+      <Navbar />
     </header>
   );
 };

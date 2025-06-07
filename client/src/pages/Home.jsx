@@ -5,8 +5,8 @@ const Home = () => {
     <div className="home">
       <h1>Welcome User</h1>
       <p>
-        Here is the main dashboard that displays a summary of your portfolio and
-        current trade performance.
+        Here is the main dashboard that displays a summary of your portfolio,
+        current trade performance, latest few messages and wallet transactions.
       </p>
 
       <p>
