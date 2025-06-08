@@ -1,7 +1,34 @@
 import React from "react";
+import { usePortfolioContext } from "../hooks/usePortfolioContext";
 
 const PortfolioDataDetailsCard = ({ data }) => {
   console.log("Portfolio Data Details Card:", data);
+  const { dispatch } = usePortfolioContext();
+
+  const handleClick = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/portfolio/${data._id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete portfolio item");
+      }
+
+      const deletedData = await response.json();
+
+      console.log("Deleted portfolio item:", deletedData);
+
+      if (response.ok) {
+        dispatch({ type: "DELETE_TRADE", payload: deletedData });
+      }
+    } catch (error) {
+      console.error("Error deleting portfolio item:", error);
+    }
+  };
 
   return (
     <div className="portfolio-details">
@@ -24,6 +51,7 @@ const PortfolioDataDetailsCard = ({ data }) => {
           hour12: false,
         })}
       </p>
+      <span onClick={handleClick}>Delete</span>
     </div>
   );
 };

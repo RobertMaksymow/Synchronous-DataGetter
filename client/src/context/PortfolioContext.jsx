@@ -8,13 +8,13 @@ export const portfolioReducer = (state, action) => {
       return { portfolioData: action.payload };
     case "CREATE_TRADE":
       return { portfolioData: [action.payload, ...state.portfolioData] };
-    // case "REMOVE_TRADE":
-    //   return {
-    //     ...state,
-    //     portfolio: state.portfolio.filter(
-    //       (trade) => trade._id !== action.payload
-    //     ),
-    //   };
+    case "DELETE_TRADE":
+      return {
+        ...state,
+        portfolioData: state.portfolioData.filter(
+          (trade) => trade._id !== action.payload._id
+        ),
+      };
     default:
       return state;
   }
