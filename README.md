@@ -10,10 +10,10 @@ RM-0002_Changing_project_structure <br>
 RM-0003_Create_Express_Routes <br>
 RM-0004_Add_portfolio_coins_MongoDB <br>
 RM-0005_Portfolio_trade_controller_db
+RM-0006_Basic_frontend_in_React
 
 CURRENT: <br>
-
-RM-0006_Basic_frontend_in_React
+RM-0007_Frontend_Adding_React_Context
 
 <br>
 PLAN: <br>

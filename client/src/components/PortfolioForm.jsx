@@ -1,16 +1,20 @@
 import React, { useState } from "react";
+import { usePortfolioContext } from "../hooks/usePortfolioContext";
 
 const PortfolioForm = () => {
+  const { dispatch } = usePortfolioContext();
+
   const [transactionType, setTransactionType] = useState("buy");
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [totalValue, setTotalValue] = useState(0);
-  const [coin, setCoin] = useState(null);
+  const [coin, setCoin] = useState("");
   const [priceInBTC, setPriceInBTC] = useState(0);
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const portfolioItem = {
       transactionType,
       price,
@@ -20,34 +24,35 @@ const PortfolioForm = () => {
       priceInBTC,
     };
 
-    const response = fetch("http://localhost:5000/api/portfolio", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(portfolioItem),
-    });
+    try {
+      const response = await fetch("http://localhost:5000/api/portfolio", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(portfolioItem),
+      });
 
-    console.log("Portfolio Item Submitted:", portfolioItem);
+      const dataAsJson = await response.json();
 
-    const data = await response.json();
-
-    console.log("EEerror:", error);
-
-    if (!response.ok) {
-      setError(data.error);
-      console.error("Error creating portfolio item:", data.error);
-    }
-    if (response.ok) {
-      setError(null);
-      console.log("Portfolio item created successfully:", data);
-      // Reset form fields after successful submission
-      setTransactionType("buy");
-      setPrice(0);
-      setQuantity(0);
-      setTotalValue(0);
-      setCoin("BTC");
-      setPriceInBTC(0);
+      if (!response.ok) {
+        setError(dataAsJson.error || "Something went wrong");
+        console.error("Error creating portfolio item:", dataAsJson.error);
+      } else {
+        setError(null);
+        console.log("Portfolio item created successfully:", dataAsJson);
+        // Reset form fields
+        setTransactionType("buy");
+        setPrice(0);
+        setQuantity(0);
+        setTotalValue(0);
+        setCoin("");
+        setPriceInBTC(0);
+        dispatch({ type: "CREATE_TRADE", payload: dataAsJson });
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+      setError("Network error. Please try again later.");
     }
   };
 

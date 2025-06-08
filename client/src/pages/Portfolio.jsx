@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import PortfolioDataDetailsCard from "../components/PortfolioDataDetailsCard";
 import PortfolioForm from "../components/PortfolioForm";
 
+import { usePortfolioContext } from "../hooks/usePortfolioContext";
+
 const Portfolio = () => {
-  const [portfolioData, setPortfolioData] = useState(null);
+  const { portfolioData, dispatch } = usePortfolioContext(); // Ensure context is used to trigger re-renders if needed
+  // const [portfolioData, setPortfolioData] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch portfolio data
     const fetchPortfolioData = async () => {
       try {
         const response = await fetch("http://localhost:5000/api/portfolio");
@@ -16,7 +18,7 @@ const Portfolio = () => {
         }
         const dataAsJson = await response.json();
         if (response.ok) {
-          setPortfolioData(dataAsJson);
+          dispatch({ type: "SET_PORTFOLIO", payload: dataAsJson });
         }
         console.log("Portfolio data:", dataAsJson);
       } catch (error) {
